@@ -29,7 +29,8 @@ require_once 'breadcrumbs.php';
 // BUTTON
 button(['label' => 'button1']);
 button('button2');
-button(['label' => 'button3', 'kind' => 'danger']);
+button(['label' => 'danger', 'kind' => 'danger']);
+button('small info btn', 'info', 'button', 'xs');
 button(['label' => 'big boy', 'size' => 'lg']);
 button(['label' => 'submit', 'type' => 'submit']);
 ?></section>
