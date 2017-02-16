@@ -10,14 +10,14 @@ function arr_get($arr, $key, $default = null) {
 /**
  * Returns first trueish argument or last argument.
  */
-function first_of() {
-    foreach (func_get_args() as $value) {
-        if ($value) {
-            return $value;
-        }
-    }
-    return $value;
-}
+// function first_of() {
+//     foreach (func_get_args() as $value) {
+//         if ($value) {
+//             return $value;
+//         }
+//     }
+//     return $value;
+// }
 
 
 /**
@@ -26,7 +26,7 @@ function first_of() {
  *
  * @param string[] $keywords List of keywords that specify keyword-argument parsing.
  */
-function parse_args($args, $args_order) {
+function keywordify_args($args, $args_order) {
     // already keyword arguments => missing keys will be filled up with `null`
     $args_is_keyworded = count($args) === 1 && is_array($args[0]);
     // var_dump($args);
@@ -47,16 +47,21 @@ function parse_args($args, $args_order) {
     }
     // var_dump('$args_is_keyworded = '.($args_is_keyworded ? 't' : 'f'));
 
-    $parsed_args = array();
+    $keywordified_args = array();
     foreach ($args_order as $idx => $arg_name) {
         if ($args_is_keyworded) {
-            $parsed_args[$arg_name] = arr_get($args, $arg_name);
+            $key = $arg_name;
+            // $keywordified_args[$arg_name] = arr_get($args, $arg_name);
         }
         else {
-            $parsed_args[$arg_name] = arr_get($args, $idx);
+            $key = $idx;
+            // $keywordified_args[$arg_name] = arr_get($args, $idx);
+        }
+        if (array_key_exists($key, $args)) {
+            $keywordified_args[$arg_name] = $args[$key];
         }
     }
-    return $parsed_args;
+    return $keywordified_args;
 }
 
 function instantiate_shortcut($cls, $args) {

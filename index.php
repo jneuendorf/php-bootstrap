@@ -1,6 +1,7 @@
 <?php
 require_once 'button.php';
 require_once 'breadcrumbs.php';
+require_once 'modal.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -30,16 +31,23 @@ require_once 'breadcrumbs.php';
 button(['label' => 'button1']);
 button('button2');
 button(['label' => 'danger', 'kind' => 'danger']);
-button('small info btn', 'info', 'button', 'xs');
+button('small info btn', 'info', array('cumstom-class', 'cumstom-class2'), 'button', 'xs');
 button(['label' => 'big boy', 'size' => 'lg']);
+button(['label' => 'big boy2', 'classes' => ['btn-lg']]);
 button(['label' => 'submit', 'type' => 'submit']);
+button(['label' => 'custom', 'attrs' => ['style' => 'color: purple;']]);
 ?></section>
 
 <section><?php
 // BREADCRUMBS
-breadcrumbs('Home', 'Library', 'Data');
-// echo (new Breadcrumbs('Home', 'Library', 'Data'))->render();
+breadcrumbs(['Home' => '#', 'Library' => '#', 'Data' => '#']);
+breadcrumbs(['Home' => '#', 'Page']);
+breadcrumbs(['Home' => '#', 'No link' => null]);
+?></section>
 
+<section><?php
+// BREADCRUMBS
+// modal();
 ?></section>
 
 </body>

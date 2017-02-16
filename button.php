@@ -2,20 +2,33 @@
 
 require_once 'include_all.php';
 
-class Button implements Renderable {
+
+// size for convenience only. could also be done by setting `classes = ['btn-xs']`
+class Button extends Component {
     public function __construct() {
-        $args = parse_args(
-            func_get_args(),
-            array('label', 'kind', 'type', 'size')
+        $this->set_instance_vars(
+            array(
+                // e.g.                  default            submit   sm-lg
+                'args' => array('label', 'kind', 'classes', 'type', 'size', 'attrs'),
+                'defaults' => array(
+                    'kind' => 'default',
+                    'classes' => array(),
+                    'type' => 'button',
+                    'attrs' => array(),
+                )
+            ),
+            func_get_args()
         );
-        $this->label = first_of($args['label'], '');
-        $this->kind = first_of($args['kind'], 'default');
-        $this->type = first_of($args['type'], 'button'); // submit
-        $this->size = first_of($args['size'], ''); // sm, lg
     }
 
     public function render() {
-        return '<button type="'.$this->type.'" class="btn btn-'.$this->kind.($this->size !== '' ? ' btn-'.$this->size : '').'">'.$this->label.'</button>';
+        return '<button '
+            .'type="'.$this->type.'" '
+            .'class="btn btn-'.$this->kind.' '.($this->size ? 'btn-'.$this->size : '').' '.$this->render_classes().'" '
+            .$this->render_attrs()
+        .'>'
+            .$this->label
+        .'</button>';
     }
 }
 

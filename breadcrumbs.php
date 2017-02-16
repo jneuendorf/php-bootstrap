@@ -2,26 +2,52 @@
 
 require_once 'include_all.php';
 
-class Breadcrumbs implements Renderable {
+// items: list of
+class Breadcrumbs extends Component {
     public function __construct() {
-        $this->items = func_get_args();
-        if (count($this->items) === 0) {
-            throw new Exception('There must be at least one breadcrumb given as string.', 1);
+        $this->set_instance_vars(
+            array(
+                'args' => array('items'),
+                'defaults' => array(
+                    'items' => array()
+                )
+            ),
+            func_get_args()
+        );
+
+        // if an item is a string instead of `label => href` create `label => '#'`
+        foreach ($this->items as $key => $value) {
+            if (is_numeric($key)) {
+                // TODO: is it safe to add and delete stuff to arrays from within a loop? (iterator?)
+                $this->items[$value] = '#';
+                unset($this->items[$key]);
+            }
         }
     }
 
+    // last item is active. set href = null|'' to disable <a> tag
     public function render() {
-        return '<ol class="breadcrumb">'
-            .implode(
-                '',
-                array_map(
-                    function($item) {
-                        return "<li><a href=\"#\">$item</a></li>";
-                    },
-                    array_slice($this->items, 0, -1)
-                )
-            )
-            .'<li class="active">'.array_slice($this->items, -1)[0].'</li>'
+        $items = array_slice($this->items, 0, -1);
+        $last_item = array_slice($this->items, -1);
+        return '<ol class="breadcrumb '.$this->render_classes().'" '.$this->render_attrs().'>'
+            .implode('', array_map(
+                function($label, $href) {
+                    return '<li><a href="'.$href.'">'.$label.'</a></li>';
+                },
+                array_keys($items),
+                array_values($items)
+            ))
+            .implode('', array_map(
+                function($label, $href) {
+                    return '<li class="active">'
+                        .($href ? '<a href="'.$href.'">' : '')
+                            .$label
+                        .($href ? '</a>' : '')
+                    .'</li>';
+                },
+                array_keys($last_item),
+                array_values($last_item)
+            ))
         .'</ol>';
     }
 }
