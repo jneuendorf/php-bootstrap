@@ -3,9 +3,9 @@
 <head>
     <meta charset="utf-8">
     <title>php-bootstrap</title>
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <script type="text/javascript" src="../js/jquery-2.2.2.min.js"></script>
-    <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <style media="screen">
         body {
             background-color: rgb(236, 236, 236);
@@ -85,30 +85,30 @@
 
 <section class="example"><pre>echo modal([
     ['classes'] =&gt; []
-])</pre><div class="modal " id="uid_58a71164f0cd7" tabindex="-1" role="dialog"  ><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title"></h4></div><div class="modal-body"></div><div class="modal-footer"><button type="button" class="btn btn-default  " data-dismiss="modal">Close</button><button type="button" class="btn btn-primary  " >Save changes</button></div></div></div></div><br><br><br><pre>echo modal([
+])</pre><div class="modal " id="uid_58a71274dd709" tabindex="-1" role="dialog"  ><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title"></h4></div><div class="modal-body"></div><div class="modal-footer"><button type="button" class="btn btn-default  " data-dismiss="modal">Close</button><button type="button" class="btn btn-primary  " >Save changes</button></div></div></div></div><br><br><br><pre>echo modal([
     ['header'] =&gt; null,
     ['footer'] =&gt; null,
     ['body'] =&gt; 'modal-body only',
     ['classes'] =&gt; []
-])</pre><div class="modal " id="uid_58a71164f0d40" tabindex="-1" role="dialog"  ><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-body">modal-body only</div></div></div></div><br><br><br><pre>echo modal([
+])</pre><div class="modal " id="uid_58a71274dd7d2" tabindex="-1" role="dialog"  ><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-body">modal-body only</div></div></div></div><br><br><br><pre>echo modal([
     ['title'] =&gt; 'My Modal',
     ['footer'] =&gt; null,
     ['body'] =&gt; 'custom title and no footer',
     ['classes'] =&gt; []
-])</pre><div class="modal " id="uid_58a71164f0d7f" tabindex="-1" role="dialog"  ><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title">My Modal</h4></div><div class="modal-body">custom title and no footer</div></div></div></div><br><br><br><pre>
+])</pre><div class="modal " id="uid_58a71274dd840" tabindex="-1" role="dialog"  ><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title">My Modal</h4></div><div class="modal-body">custom title and no footer</div></div></div></div><br><br><br><pre>
 echo modal([
     'header' => null,
     'footer' => button('cool', 'warning'),
     'body' => 'no header and custom button in footer',
     'classes' => []
 ])
-</pre><div class="modal " id="uid_58a71164f0db9" tabindex="-1" role="dialog"  ><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-body">no header and custom button in footer</div><div class="modal-footer"><button type="button" class="btn btn-warning  " >cool</button></div></div></div></div><pre>echo modal([
+</pre><div class="modal " id="uid_58a71274dd8b2" tabindex="-1" role="dialog"  ><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-body">no header and custom button in footer</div><div class="modal-footer"><button type="button" class="btn btn-warning  " >cool</button></div></div></div></div><pre>echo modal([
     ['body'] =&gt; 'initialized with JavaScript (thus it can be closed)',
     ['initialize'] =&gt; 1,
     ['attrs'] =&gt; [
         ['data-backdrop'] =&gt; 'false'
     ]
-])</pre><div class="modal fade" id="uid_58a71164f0df7" tabindex="-1" role="dialog" data-backdrop="false" ><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title"></h4></div><div class="modal-body">initialized with JavaScript (thus it can be closed)</div><div class="modal-footer"><button type="button" class="btn btn-default  " data-dismiss="modal">Close</button><button type="button" class="btn btn-primary  " >Save changes</button></div></div></div></div><script type="text/javascript">$("#uid_58a71164f0df7").modal();</script><br><br><br><pre>
+])</pre><div class="modal fade" id="uid_58a71274dd95c" tabindex="-1" role="dialog" data-backdrop="false" ><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title"></h4></div><div class="modal-body">initialized with JavaScript (thus it can be closed)</div><div class="modal-footer"><button type="button" class="btn btn-default  " data-dismiss="modal">Close</button><button type="button" class="btn btn-primary  " >Save changes</button></div></div></div></div><script type="text/javascript">$("#uid_58a71274dd95c").modal();</script><br><br><br><pre>
 echo modal_begin([&apos;footer&apos; =&gt; button(&apos;Button&apos;), &apos;classes&apos; =&gt; []]);
 echo modal_header(); ?&gt;
 &lt;div class=&quot;modal-body&quot;&gt;
@@ -119,7 +119,7 @@ echo modal_header(); ?&gt;
 &lt;?php
 echo modal_footer();
 echo modal_end();__DIR__.
-/</pre><div class="modal " id="uid_58a71164f0e52" tabindex="-1" role="dialog"  ><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title"></h4></div><div class="modal-body">
+/</pre><div class="modal " id="uid_58a71274ddade" tabindex="-1" role="dialog"  ><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title"></h4></div><div class="modal-body">
     <h5>
         Only the modal body is written in pure HTML.
     </h5>
