@@ -12,9 +12,7 @@ class Button extends Component {
                 'args' => array('label', 'kind', 'classes', 'type', 'size', 'attrs'),
                 'defaults' => array(
                     'kind' => 'default',
-                    'classes' => array(),
                     'type' => 'button',
-                    'attrs' => array(),
                 )
             ),
             func_get_args()

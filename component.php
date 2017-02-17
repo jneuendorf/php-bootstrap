@@ -19,14 +19,20 @@ abstract class Component implements Renderable {
         foreach ($default_vars as $var_name => $default_value) {
             if (!in_array($var_name, $arg_config['args'])) {
                 array_push($arg_config['args'], $var_name);
+                // $arg_config['defaults'][$var_name] = $default_value;
+            }
+            if (!array_key_exists($var_name, $arg_config['defaults'])) {
                 $arg_config['defaults'][$var_name] = $default_value;
             }
         }
+
+        // var_dump($arg_config);
 
         $keyword_args = keywordify_args(
             $given_args,
             $arg_config['args']
         );
+        // var_dump($keyword_args);
         $default_value = '';
         foreach ($arg_config['args'] as $arg_name) {
             $this->$arg_name = arr_get(

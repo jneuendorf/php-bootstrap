@@ -35,6 +35,7 @@ function keywordify_args($args, $args_order) {
     if ($args_is_keyworded) {
         foreach ($args[0] as $key => $value) {
             if (!in_array($key, $args_order)) {
+                // var_dump('args not interpreted as kwargs because '.$key.' does not appear in args_order.');
                 $args_is_keyworded = false;
                 break;
             }
@@ -46,6 +47,7 @@ function keywordify_args($args, $args_order) {
         $args = $args[0];
     }
     // var_dump('$args_is_keyworded = '.($args_is_keyworded ? 't' : 'f'));
+    // var_dump($args);
 
     $keywordified_args = array();
     foreach ($args_order as $idx => $arg_name) {
@@ -73,5 +75,5 @@ function instantiate_shortcut($cls, $args) {
 
 function render_shortcut($cls, $args) {
     $instance = instantiate_shortcut($cls, $args);
-    echo $instance->render();
+    return $instance->render();
 }
