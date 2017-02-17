@@ -40,41 +40,47 @@ class Modal extends Component {
         );
     }
 
+    public function get_header() {
+        return $this->header === null ? '' :
+            '<div class="modal-header">'
+                .(
+                    $this->header ?
+                    $this->header :
+                    '<button type="button" class="close" data-dismiss="modal" aria-label="Close">'
+                        .'<span aria-hidden="true">&times;</span>'
+                    .'</button>'
+                    .'<h4 class="modal-title">'
+                        .$this->title
+                    .'</h4>'
+                )
+            .'</div>';
+    }
+
+    public function get_body() {
+        return '<div class="modal-body">'
+            .$this->body
+        .'</div>';
+    }
+
+    public function get_footer() {
+        return $this->footer === null ? '' :
+            '<div class="modal-footer">'
+                .(
+                    $this->footer ?
+                    $this->footer :
+                    button(array('label' => 'Close', 'attrs' => array('data-dismiss' => 'modal')))
+                    // .'<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>'
+                    .button(array('label' => 'Save changes', 'kind' => 'primary'))
+                    // .'<button type="button" class="btn btn-primary">Save changes</button>'
+                )
+            .'</div>';
+    }
+
     public function render() {
         return $this->begin()
-            .(
-                $this->header === null ?
-                '' :
-                '<div class="modal-header">'
-                    .(
-                        $this->header ?
-                        $this->header :
-                        '<button type="button" class="close" data-dismiss="modal" aria-label="Close">'
-                            .'<span aria-hidden="true">&times;</span>'
-                        .'</button>'
-                        .'<h4 class="modal-title">'
-                            .$this->title
-                        .'</h4>'
-                    )
-                .'</div>'
-            )
-            .'<div class="modal-body">'
-                .$this->body
-            .'</div>'
-            .(
-                $this->footer === null ?
-                '' :
-                '<div class="modal-footer">'
-                    .(
-                        $this->footer ?
-                        $this->footer :
-                        button(array('label' => 'Close', 'attrs' => array('data-dismiss' => 'modal')))
-                        // .'<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>'
-                        .button(array('label' => 'Save changes', 'kind' => 'primary'))
-                        // .'<button type="button" class="btn btn-primary">Save changes</button>'
-                    )
-                .'</div>'
-            )
+            .$this->get_header()
+            .$this->get_body()
+            .$this->get_footer()
             .$this->end();
     }
 }
@@ -86,20 +92,47 @@ function modal() {
     return render_shortcut('Modal', func_get_args());
 }
 
+
 $_currently_rendering_modal = null;
 // convenience methods to be able to write modal body in HTML (instead of passing a string in PHP)
 function modal_begin() {
     global $_currently_rendering_modal;
     if ($_currently_rendering_modal !== null) {
-        throw new Exception('You must call modal_end() before calling modal_begin() again.', 1);
+        throw new Exception('You must call modal_end() before calling '.__FUNCTION__.'() again.', 1);
     }
     $instance = instantiate_shortcut('Modal', func_get_args());
     $_currently_rendering_modal = $instance;
     return $instance->begin();
 }
+
 function modal_end() {
     global $_currently_rendering_modal;
+    if ($_currently_rendering_modal === null) {
+        throw new Exception('You must call modal_begin() before calling '.__FUNCTION__.'().', 1);
+    }
     $html = $_currently_rendering_modal->end();
     $_currently_rendering_modal = null;
     return $html;
+}
+
+function modal_header() {
+    global $_currently_rendering_modal;
+    if ($_currently_rendering_modal === null) {
+        throw new Exception('You must call modal_begin() before calling '.__FUNCTION__.'().', 1);
+    }
+    return $_currently_rendering_modal->get_header();
+}
+function modal_body() {
+    global $_currently_rendering_modal;
+    if ($_currently_rendering_modal === null) {
+        throw new Exception('You must call modal_begin() before calling '.__FUNCTION__.'().', 1);
+    }
+    return $_currently_rendering_modal->get_body();
+}
+function modal_footer() {
+    global $_currently_rendering_modal;
+    if ($_currently_rendering_modal === null) {
+        throw new Exception('You must call modal_begin() before calling '.__FUNCTION__.'().', 1);
+    }
+    return $_currently_rendering_modal->get_footer();
 }

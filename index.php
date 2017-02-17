@@ -60,7 +60,7 @@ echo breadcrumbs(['Home' => '#', 'No link' => null]);
 ?></section>
 
 <section class="example"><?php
-// BREADCRUMBS
+// MODAL
 // show modal by avoiding the 'fade' class to be set (by default)
 echo modal(['classes' => []]);
 echo modal(['header' => null, 'footer' => null, 'body' => 'modal-body only', 'classes' => []]);
@@ -71,11 +71,12 @@ echo modal([
     'body' => 'no header and custom button in footer',
     'classes' => []]
 );
+
 // show modal by initializing it (without backdrop)
 echo modal(['body' => 'initialized with JavaScript (thus it can be closed)', 'initialize' => true, 'attrs' => array('data-backdrop' => 'false')]);
 
+// parts defined in pure HTML
 echo modal_begin(['classes' => []]); ?>
-
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
     <h3 class="modal-title">Custom HTML</h3>
@@ -97,8 +98,19 @@ echo modal_begin(['classes' => []]); ?>
     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
     <button type="button" class="btn btn-primary">Send message</button>
 </div>
-
 <?php
+echo modal_end();
+
+
+echo modal_begin(['footer' => button('Button'), 'classes' => []]);
+echo modal_header(); ?>
+<div class="modal-body">
+    <h5>
+        Only the modal body is written in pure HTML.
+    </h5>
+</div>
+<?php
+echo modal_footer();
 echo modal_end();
 ?></section>
 
