@@ -25,6 +25,9 @@ function p($value) {
     if (is_null($value)) {
         return 'null';
     }
+    if (is_bool($value)) {
+        return $value ? 'true' : 'false';
+    }
     return $value.'';
 }
 
