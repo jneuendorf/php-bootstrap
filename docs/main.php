@@ -109,6 +109,13 @@ function modal_doc_no_kwargs() {
             padding: 10px;
             margin-bottom: 30px;
         }
+        code {
+            border: 1px solid rgba(170, 170, 170, 0.6);
+            border-radius: 4px;
+            display: inline-block;
+            padding: 4px;
+            margin-bottom: 45px;
+        }
         .example .modal {
             position: relative;
             top: auto;
@@ -124,7 +131,20 @@ function modal_doc_no_kwargs() {
 
 <div class="container">
 
-<section><?php
+<section style="font-size: 18px; text-align: justify;">
+    <h3>
+        Easily generate bootstrap elements directly from PHP.<br>
+        No more writing the same markup all over the place all the time.
+    </h3>
+    The currently supported elements are buttons, breadcrumbs and modals.
+    Below there are some demos showing the according PHP code and the output.
+    Generally, you can choose between keyword-like arguments and positional arguments.
+</section>
+
+<h1>Button</h1>
+<section>
+<code>button(string label='', string kind='default', array classes=array(), string type='button', string size='', assoc_array attrs=array())</code>
+<?php
 // BUTTON
 button_doc(['label' => 'button1']);
 button_doc_no_kwargs('button2');
@@ -136,14 +156,23 @@ button_doc(['label' => 'submit', 'type' => 'submit']);
 button_doc(['label' => 'custom', 'attrs' => ['style' => 'color: purple;']]);
 ?></section>
 
-<section><?php
+<h1>Breadcrumbs</h1>
+<section>
+<code>breadcrumbs(array items=array(), array classes=array(), assoc_array attrs=array())</code>
+<?php
 // BREADCRUMBS
 breadcrumbs_doc(['Home' => '#', 'Library' => '#', 'Data' => '#']);
-breadcrumbs_doc(['items' => ['Home' => '#', 'Page']]);
+breadcrumbs_doc(['items' => ['Google' => 'http://www.google.com', 'Page']]);
 breadcrumbs_doc(['Home' => '#', 'No link' => null]);
 ?></section>
 
-<section class="example"><?php
+<h1>Modal</h1>
+<section class="example">
+<code>modal(string title='', string body='', string footer='', string header='', string id='uid_'.uniqid(), array classes=array('fade'), assoc_array attrs=array(), bool initialize=false)</code>
+<div class="alert alert-warning" role="alert">
+    <strong>Note:</strong> 'classes' is set to '[]' to prevent that the 'fade' class is set.
+</div>
+<?php
 // MODAL
 // show modal by avoiding the 'fade' class to be set (by default)
 modal_doc(['classes' => []]);
@@ -178,8 +207,7 @@ echo modal_header(); ?&gt;
 &lt;/div&gt;
 &lt;?php
 echo modal_footer();
-echo modal_end();__DIR__.
-/</pre><?php
+echo modal_end();</pre><?php
 echo modal_begin(['footer' => button('Button'), 'classes' => []]);
 echo modal_header(); ?>
 <div class="modal-body">
