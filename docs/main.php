@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__.'/../button.php';
+require_once __DIR__.'/../alert.php';
 require_once __DIR__.'/../breadcrumbs.php';
 require_once __DIR__.'/../modal.php';
 
@@ -73,6 +74,13 @@ function button_doc_no_kwargs() {
     _delegator('button', func_get_args(), false);
 }
 
+function alert_doc() {
+    _delegator('alert', func_get_args(), true);
+}
+function alert_doc_no_kwargs() {
+    _delegator('alert', func_get_args(), false);
+}
+
 function breadcrumbs_doc() {
     _delegator('breadcrumbs', func_get_args(), true);
 }
@@ -141,6 +149,7 @@ function modal_doc_no_kwargs() {
     Generally, you can choose between keyword-like arguments and positional arguments.
 </section>
 
+
 <h1>Button</h1>
 <section>
 <code>button(string label='', string kind='default', array classes=array(), string type='button', string size='', assoc_array attrs=array())</code>
@@ -156,23 +165,63 @@ button_doc(['label' => 'submit', 'type' => 'submit']);
 button_doc(['label' => 'custom', 'attrs' => ['style' => 'color: purple;']]);
 ?></section>
 
+
+<h1>Alerts</h1>
+<section>
+<code>alert(string kind, string content, bool dismissible, string id, classes=array(), assoc_array attrs=array())</code>
+<?php
+// ALERT
+alert_doc_no_kwargs('danger', 'this looks dangerous');
+alert_doc(['kind' => 'warning', 'content' => 'indismissible me (not)', 'dismissible' => true]);
+?>
+<pre>
+echo alert_begin([&apos;kind&apos; =&gt; &apos;success&apos;, &apos;dismissible&apos; =&gt; true]); ?&gt;
+This is a dismissible alert with a bit more complex HTML (which nobody wants to put into a PHP string).
+&lt;a href=&quot;#&quot; class=&quot;alert-link&quot;&gt;This is a link with special markup also.&lt;/a&gt;
+&lt;?php
+echo button('Check this out');
+echo alert_end();
+</pre><?php
+echo alert_begin(['kind' => 'success', 'dismissible' => true]); ?>
+This is a dismissible alert with a bit more complex HTML (which nobody wants to put into a PHP string).
+<a href="#" class="alert-link">This is a link with special markup also.</a><br>
+<?php
+echo button('Check this out');
+echo alert_end();
+?></section>
+
+
 <h1>Breadcrumbs</h1>
 <section>
 <code>breadcrumbs(array items=array(), array classes=array(), assoc_array attrs=array())</code>
 <?php
 // BREADCRUMBS
 breadcrumbs_doc(['Home' => '#', 'Library' => '#', 'Data' => '#']);
-breadcrumbs_doc(['items' => ['Google' => 'http://www.google.com', 'Page']]);
+?>
+<pre>
+echo breadcrumbs([
+    [&apos;items&apos;] =&gt; [
+        [&apos;Homepage&apos;] =&gt; &apos;http://www.google.com&apos;,
+        &apos;Page&apos;,
+        &apos;Subpage&apos;
+    ]
+])</pre>
+<?php
+echo breadcrumbs(['items' => ['Homepage' => 'http://www.google.com', 'Page', 'Subpage']]).'<br><br><br>';
 breadcrumbs_doc(['Home' => '#', 'No link' => null]);
 ?></section>
+
 
 <h1>Modal</h1>
 <section class="example">
 <code>modal(string title='', string body='', string footer='', string header='', string id='uid_'.uniqid(), array classes=array('fade'), assoc_array attrs=array(), bool initialize=false)</code>
-<div class="alert alert-warning" role="alert">
-    <strong>Note:</strong> 'classes' is set to '[]' to prevent that the 'fade' class is set.
-</div>
 <?php
+echo alert_begin('warning'); ?>
+<strong>Note:</strong> 'classes' is set to '[]' to prevent that the 'fade' class is set.
+<?php
+echo alert_end();
+
+
 // MODAL
 // show modal by avoiding the 'fade' class to be set (by default)
 modal_doc(['classes' => []]);

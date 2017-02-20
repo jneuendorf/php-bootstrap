@@ -15,11 +15,11 @@ class Breadcrumbs extends Component {
             func_get_args()
         );
 
-        // if an item is a string instead of `label => href` create `label => '#'`
+        // numeric index => no link
         foreach ($this->items as $key => $value) {
             if (is_numeric($key)) {
                 // TODO: is it safe to add and delete stuff to arrays from within a loop? (iterator?)
-                $this->items[$value] = '#';
+                $this->items[$value] = null;
                 unset($this->items[$key]);
             }
         }
@@ -32,7 +32,11 @@ class Breadcrumbs extends Component {
         return '<ol class="breadcrumb '.$this->render_classes().'" '.$this->render_attrs().'>'
             .implode('', array_map(
                 function($label, $href) {
-                    return '<li><a href="'.$href.'">'.$label.'</a></li>';
+                    return '<li>'
+                        .($href ? '<a href="'.$href.'">' : '')
+                            .$label
+                        .($href ? '</a>' : '')
+                    .'</li>';
                 },
                 array_keys($items),
                 array_values($items)
