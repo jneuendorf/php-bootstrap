@@ -144,7 +144,8 @@ function modal_doc_no_kwargs() {
         Easily generate bootstrap elements directly from PHP.<br>
         No more writing the same markup all over the place all the time.
     </h3>
-    The currently supported elements are buttons, breadcrumbs and modals.
+    <br>
+    The currently supported elements are <strong>buttons</strong>, <strong>alerts</strong>, <strong>breadcrumbs</strong> and <strong>modals</strong>.
     Below there are some demos showing the according PHP code and the output.
     Generally, you can choose between keyword-like arguments and positional arguments.
 </section>
