@@ -96,21 +96,21 @@
 
     <h1>Alerts</h1>
     <section>
-    <code>alert(string kind, string content, bool dismissible, string id, classes=array(), assoc_array attrs=array())</code>
+    <code>Alert::create(string kind, string content, bool dismissible, string id, classes=array(), assoc_array attrs=array())</code>
     <pre>echo Alert::create([
     'warning',
     'indismissible me'
-])</pre><div class="alert alert-warning " role="alert" id="uid_58adb4850d935" >indismissible me</div><br><br><br><pre>echo Alert::create([
+])</pre><div class="alert alert-warning " role="alert" id="uid_58adb4fd9dcff" >indismissible me</div><br><br><br><pre>echo Alert::create([
     ['kind'] =&gt; 'danger',
     ['content'] =&gt; '&lt;strong&gt;Dangerous&lt;/strong&gt;',
     ['dismissible'] =&gt; true
-])</pre><div class="alert alert-danger " role="alert" id="uid_58adb4850d99e" ><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>Dangerous</strong></div><script type="text/javascript">$("#uid_58adb4850d99e").alert();</script><br><br><br>    <pre>
+])</pre><div class="alert alert-danger " role="alert" id="uid_58adb4fd9dd61" ><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>Dangerous</strong></div><script type="text/javascript">$("#uid_58adb4fd9dd61").alert();</script><br><br><br>    <pre>
 echo Alert::begin([&apos;kind&apos; =&gt; &apos;success&apos;, &apos;dismissible&apos; =&gt; true]); ?&gt;
     This is a dismissible alert with a bit more complex HTML (which nobody wants to put into a PHP string).
     &lt;a href=&quot;#&quot; class=&quot;alert-link&quot;&gt;This is a link with special markup also.&lt;/a&gt;&lt;?php
 echo Button::create('Check this out');
-echo Alert::end();</pre><div class="alert alert-success " role="alert" id="uid_58adb4850d9da" ><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>        This is a dismissible alert with a bit more complex HTML (which nobody wants to put into a PHP string).
-        <a href="#" class="alert-link">This is a link with special markup also.</a><br><button type="button" class="btn btn-default  " >Check this out</button></div><script type="text/javascript">$("#uid_58adb4850d9da").alert();</script></section>
+echo Alert::end();</pre><div class="alert alert-success " role="alert" id="uid_58adb4fd9ddb6" ><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>        This is a dismissible alert with a bit more complex HTML (which nobody wants to put into a PHP string).
+        <a href="#" class="alert-link">This is a link with special markup also.</a><br><button type="button" class="btn btn-default  " >Check this out</button></div><script type="text/javascript">$("#uid_58adb4fd9ddb6").alert();</script></section>
 
 
     <h1>Breadcrumbs</h1>
@@ -136,33 +136,33 @@ echo Breadcrumbs::create([
 
     <h1>Modal</h1>
     <section class="example">
-    <code>modal(string title='', string body='', string footer='', string header='', string id='uid_'.uniqid(), array classes=array('fade'), assoc_array attrs=array(), bool initialize=false)</code>
-    <div class="alert alert-warning " role="alert" id="uid_58adb4850db05" >        <strong>Note:</strong> 'classes' is set to '[]' to prevent that the 'fade' class is set.
+    <code>Modal::create(string title='', string body='', string footer='', string header='', string id='uid_'.uniqid(), array classes=array('fade'), assoc_array attrs=array(), bool initialize=false)</code>
+    <div class="alert alert-warning " role="alert" id="uid_58adb4fd9deba" >        <strong>Note:</strong> 'classes' is set to '[]' to prevent that the 'fade' class is set.
     </div><pre>echo Modal::create([
     ['classes'] =&gt; []
-])</pre><div class="modal " id="uid_58adb4850db3a" tabindex="-1" role="dialog"  ><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title"></h4></div><div class="modal-body"></div><div class="modal-footer"><button type="button" class="btn btn-default  " data-dismiss="modal">Close</button></div></div></div></div><br><br><br><pre>echo Modal::create([
+])</pre><div class="modal " id="uid_58adb4fd9dee5" tabindex="-1" role="dialog"  ><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title"></h4></div><div class="modal-body"></div><div class="modal-footer"><button type="button" class="btn btn-default  " data-dismiss="modal">Close</button></div></div></div></div><br><br><br><pre>echo Modal::create([
     ['header'] =&gt; null,
     ['footer'] =&gt; null,
     ['body'] =&gt; 'modal-body only',
     ['classes'] =&gt; []
-])</pre><div class="modal " id="uid_58adb4850dbb4" tabindex="-1" role="dialog"  ><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-body">modal-body only</div></div></div></div><br><br><br><pre>echo Modal::create([
+])</pre><div class="modal " id="uid_58adb4fd9df34" tabindex="-1" role="dialog"  ><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-body">modal-body only</div></div></div></div><br><br><br><pre>echo Modal::create([
     ['title'] =&gt; 'My Modal',
     ['footer'] =&gt; null,
     ['body'] =&gt; 'custom title and no footer',
     ['classes'] =&gt; []
-])</pre><div class="modal " id="uid_58adb4850dc04" tabindex="-1" role="dialog"  ><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title">My Modal</h4></div><div class="modal-body">custom title and no footer</div></div></div></div><br><br><br><pre>
+])</pre><div class="modal " id="uid_58adb4fd9df67" tabindex="-1" role="dialog"  ><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title">My Modal</h4></div><div class="modal-body">custom title and no footer</div></div></div></div><br><br><br><pre>
 echo Modal::create([
     'header' => null,
     'footer' => Button::create('cool', 'warning'),
     'body' => 'no header and custom button in footer',
     'classes' => []
-])</pre><div class="modal " id="uid_58adb4850dc91" tabindex="-1" role="dialog"  ><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-body">no header and custom button in footer</div><div class="modal-footer"><button type="button" class="btn btn-warning  " >cool</button></div></div></div></div><pre>echo Modal::create([
+])</pre><div class="modal " id="uid_58adb4fd9dfd9" tabindex="-1" role="dialog"  ><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-body">no header and custom button in footer</div><div class="modal-footer"><button type="button" class="btn btn-warning  " >cool</button></div></div></div></div><pre>echo Modal::create([
     ['body'] =&gt; 'initialized with JavaScript (thus it can be closed)',
     ['initialize'] =&gt; true,
     ['attrs'] =&gt; [
         ['data-backdrop'] =&gt; 'false'
     ]
-])</pre><div class="modal fade" id="uid_58adb4850dd11" tabindex="-1" role="dialog" data-backdrop="false" ><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title"></h4></div><div class="modal-body">initialized with JavaScript (thus it can be closed)</div><div class="modal-footer"><button type="button" class="btn btn-default  " data-dismiss="modal">Close</button></div></div></div></div><script type="text/javascript">$("#uid_58adb4850dd11").modal();</script><br><br><br><pre>
+])</pre><div class="modal fade" id="uid_58adb4fd9e00c" tabindex="-1" role="dialog" data-backdrop="false" ><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title"></h4></div><div class="modal-body">initialized with JavaScript (thus it can be closed)</div><div class="modal-footer"><button type="button" class="btn btn-default  " data-dismiss="modal">Close</button></div></div></div></div><script type="text/javascript">$("#uid_58adb4fd9e00c").modal();</script><br><br><br><pre>
 echo Modal::begin([&apos;footer&apos; =&gt; Button::create(&apos;Button&apos;), &apos;classes&apos; =&gt; []]);
 echo Modal::header(); ?&gt;
 &lt;div class=&quot;modal-body&quot;&gt;
@@ -172,7 +172,7 @@ echo Modal::header(); ?&gt;
 &lt;/div&gt;
 &lt;?php
 echo Modal::footer();
-echo Modal::end();</pre><div class="modal " id="uid_58adb4850dda0" tabindex="-1" role="dialog"  ><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title"></h4></div>    <div class="modal-body">
+echo Modal::end();</pre><div class="modal " id="uid_58adb4fd9e057" tabindex="-1" role="dialog"  ><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title"></h4></div>    <div class="modal-body">
         <h5>
             Only the modal body is written in pure HTML.
         </h5>

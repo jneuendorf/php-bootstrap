@@ -181,7 +181,7 @@ function modal_doc_no_kwargs() {
 <?php if ($alert_docs === true): ?>
     <h1>Alerts</h1>
     <section>
-    <code>alert(string kind, string content, bool dismissible, string id, classes=array(), assoc_array attrs=array())</code>
+    <code>Alert::create(string kind, string content, bool dismissible, string id, classes=array(), assoc_array attrs=array())</code>
     <?php
     // ALERT
     alert_doc_no_kwargs('warning', 'indismissible me');
@@ -228,7 +228,7 @@ echo Breadcrumbs::create([
 <?php if ($modal_docs === true): ?>
     <h1>Modal</h1>
     <section class="example">
-    <code>modal(string title='', string body='', string footer='', string header='', string id='uid_'.uniqid(), array classes=array('fade'), assoc_array attrs=array(), bool initialize=false)</code>
+    <code>Modal::create(string title='', string body='', string footer='', string header='', string id='uid_'.uniqid(), array classes=array('fade'), assoc_array attrs=array(), bool initialize=false)</code>
     <?php
     echo Alert::begin('warning'); ?>
         <strong>Note:</strong> 'classes' is set to '[]' to prevent that the 'fade' class is set.
