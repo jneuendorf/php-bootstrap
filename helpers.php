@@ -1,23 +1,11 @@
 <?php
 
-function arr_get($arr, $key, $default = null) {
+function arr_get($arr, $key, $default=null) {
     if (array_key_exists($key, $arr)) {
         return $arr[$key];
     }
     return $default;
 }
-
-/**
- * Returns first trueish argument or last argument.
- */
-// function first_of() {
-//     foreach (func_get_args() as $value) {
-//         if ($value) {
-//             return $value;
-//         }
-//     }
-//     return $value;
-// }
 
 
 /**
@@ -53,11 +41,9 @@ function keywordify_args($args, $args_order) {
     foreach ($args_order as $idx => $arg_name) {
         if ($args_is_keyworded) {
             $key = $arg_name;
-            // $keywordified_args[$arg_name] = arr_get($args, $arg_name);
         }
         else {
             $key = $idx;
-            // $keywordified_args[$arg_name] = arr_get($args, $idx);
         }
         if (array_key_exists($key, $args)) {
             $keywordified_args[$arg_name] = $args[$key];

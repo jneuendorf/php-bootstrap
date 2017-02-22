@@ -55,10 +55,3 @@ class Breadcrumbs extends Component {
         .'</ol>';
     }
 }
-
-/**
- * @param ...string $items
- */
-function breadcrumbs() {
-    return render_shortcut('Breadcrumbs', func_get_args());
-}

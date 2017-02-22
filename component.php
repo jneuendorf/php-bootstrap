@@ -5,9 +5,16 @@ require_once 'helpers.php';
 
 
 abstract class Component implements Renderable {
-
     protected $classes;
     protected $attrs;
+
+    public static function create() {
+        return render_shortcut(get_called_class(), func_get_args());
+    }
+
+    protected static function get_exception($called_from, $name) {
+        return new Exception('You must call '.get_called_class().'::'.$name.'() before calling '.$called_from.'().', 1);
+    }
 
     /**
      * Converts the $given_args into a dictionary that will be used to set the according instance variables.

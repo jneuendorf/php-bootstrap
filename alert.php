@@ -5,6 +5,9 @@ require_once 'include_all.php';
 
 // size for convenience only. could also be done by setting `classes = ['btn-xs']`
 class Alert extends Component {
+    // can't be inherited anyways
+    private static $currently_rendered = null;
+
     public function __construct() {
         $this->set_instance_vars(
             array(
@@ -18,7 +21,32 @@ class Alert extends Component {
         );
     }
 
-    public function begin() {
+
+    // STATIC METHODS
+
+    // convenience methods to be able to write modal body in HTML (instead of passing a string in PHP)
+    public static function begin() {
+        if (static::$currently_rendered !== null) {
+            throw static::get_exception('end', __FUNCTION__);
+        }
+        $instance = instantiate_shortcut(get_called_class(), func_get_args());
+        static::$currently_rendered = $instance;
+        return $instance->render_begin();
+    }
+
+    public static function end() {
+        if (static::$currently_rendered === null) {
+            throw static::get_exception('begin', __FUNCTION__);
+        }
+        $html = static::$currently_rendered->render_end();
+        static::$currently_rendered = null;
+        return $html;
+    }
+
+
+    // INSTANCE METHODS
+
+    public function render_begin() {
         return '<div class="alert alert-'.$this->kind.' '.$this->render_classes().'" role="alert" id="'.$this->id.'" '.$this->render_attrs().'>'
             .(
                 $this->dismissible
@@ -32,7 +60,7 @@ class Alert extends Component {
     }
 
     // html from modal-content
-    public function end() {
+    public function render_end() {
         return '</div>'
         .(
             $this->dismissible ?
@@ -42,35 +70,8 @@ class Alert extends Component {
     }
 
     public function render() {
-        return $this->begin()
+        return $this->render_begin()
             .$this->content
-            .$this->end();
+            .$this->render_end();
     }
-}
-
-
-function alert() {
-    return render_shortcut('Alert', func_get_args());
-}
-
-$_currently_rendered_alert = null;
-// convenience methods to be able to write alert content in HTML (instead of passing a string in PHP)
-function alert_begin() {
-    global $_currently_rendered_alert;
-    if ($_currently_rendered_alert !== null) {
-        throw new Exception('You must call alert_end() before calling '.__FUNCTION__.'() again.', 1);
-    }
-    $instance = instantiate_shortcut('Alert', func_get_args());
-    $_currently_rendered_alert = $instance;
-    return $instance->begin();
-}
-
-function alert_end() {
-    global $_currently_rendered_alert;
-    if ($_currently_rendered_alert === null) {
-        throw new Exception('You must call alert_begin() before calling '.__FUNCTION__.'().', 1);
-    }
-    $html = $_currently_rendered_alert->end();
-    $_currently_rendered_alert = null;
-    return $html;
 }

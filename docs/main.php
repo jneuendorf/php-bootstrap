@@ -62,37 +62,44 @@ function print_args($args, $is_kwargs) {
 }
 
 
-function _delegator($func_name, $args, $is_kwargs) {
-    echo '<pre>echo '.$func_name.'('.print_args($args, $is_kwargs).')</pre>';
-    echo call_user_func_array($func_name, $args).'<br><br><br>';
+// show only certain sections (for development)
+$button_docs = true;
+$alert_docs = true;
+$breadcrumbs_docs = true;
+$modal_docs = true;
+
+
+function _delegator($cls_name, $args, $is_kwargs) {
+    echo '<pre>echo '.$cls_name.'::create('.print_args($args, $is_kwargs).')</pre>';
+    echo call_user_func_array($cls_name.'::create', $args).'<br><br><br>';
 }
 
 function button_doc() {
-    _delegator('button', func_get_args(), true);
+    _delegator('Button', func_get_args(), true);
 }
 function button_doc_no_kwargs() {
-    _delegator('button', func_get_args(), false);
+    _delegator('Button', func_get_args(), false);
 }
 
 function alert_doc() {
-    _delegator('alert', func_get_args(), true);
+    _delegator('Alert', func_get_args(), true);
 }
 function alert_doc_no_kwargs() {
-    _delegator('alert', func_get_args(), false);
+    _delegator('Alert', func_get_args(), false);
 }
 
 function breadcrumbs_doc() {
-    _delegator('breadcrumbs', func_get_args(), true);
+    _delegator('Breadcrumbs', func_get_args(), true);
 }
 function breadcrumbs_doc_no_kwargs() {
-    _delegator('breadcrumbs', func_get_args(), false);
+    _delegator('Breadcrumbs', func_get_args(), false);
 }
 
 function modal_doc() {
-    _delegator('modal', func_get_args(), true);
+    _delegator('Modal', func_get_args(), true);
 }
 function modal_doc_no_kwargs() {
-    _delegator('modal', func_get_args(), false);
+    _delegator('Modal', func_get_args(), false);
 }
 ?>
 <!DOCTYPE html>
@@ -117,6 +124,9 @@ function modal_doc_no_kwargs() {
             padding: 10px;
             margin-bottom: 30px;
         }
+        /*pre, code {
+            white-space: pre-line;
+        }*/
         code {
             border: 1px solid rgba(170, 170, 170, 0.6);
             border-radius: 4px;
@@ -150,125 +160,128 @@ function modal_doc_no_kwargs() {
     Generally, you can choose between keyword-like arguments and positional arguments.
 </section>
 
-
-<h1>Button</h1>
-<section>
-<code>button(string label='', string kind='default', array classes=array(), string type='button', string size='', assoc_array attrs=array())</code>
-<?php
-// BUTTON
-button_doc(['label' => 'button1']);
-button_doc_no_kwargs('button2');
-button_doc(['label' => 'danger', 'kind' => 'danger']);
-button_doc_no_kwargs('small info btn', 'info', array('cumstom-class', 'cumstom-class2'), 'button', 'xs');
-button_doc(['label' => 'big boy', 'size' => 'lg']);
-button_doc(['label' => 'big boy2', 'classes' => ['btn-lg']]);
-button_doc(['label' => 'submit', 'type' => 'submit']);
-button_doc(['label' => 'custom', 'attrs' => ['style' => 'color: purple;']]);
-?></section>
-
-
-<h1>Alerts</h1>
-<section>
-<code>alert(string kind, string content, bool dismissible, string id, classes=array(), assoc_array attrs=array())</code>
-<?php
-// ALERT
-alert_doc_no_kwargs('danger', 'this looks dangerous');
-alert_doc(['kind' => 'warning', 'content' => 'indismissible me (not)', 'dismissible' => true]);
-?>
-<pre>
-echo alert_begin([&apos;kind&apos; =&gt; &apos;success&apos;, &apos;dismissible&apos; =&gt; true]); ?&gt;
-This is a dismissible alert with a bit more complex HTML (which nobody wants to put into a PHP string).
-&lt;a href=&quot;#&quot; class=&quot;alert-link&quot;&gt;This is a link with special markup also.&lt;/a&gt;
-&lt;?php
-echo button('Check this out');
-echo alert_end();
-</pre><?php
-echo alert_begin(['kind' => 'success', 'dismissible' => true]); ?>
-This is a dismissible alert with a bit more complex HTML (which nobody wants to put into a PHP string).
-<a href="#" class="alert-link">This is a link with special markup also.</a><br>
-<?php
-echo button('Check this out');
-echo alert_end();
-?></section>
+<?php if ($button_docs === true): ?>
+    <h1>Button</h1>
+    <section>
+    <code>Button::create(string label='', string kind='default', array classes=array(), string type='button', string size='', assoc_array attrs=array())</code>
+    <?php
+    // BUTTON
+    button_doc(['label' => 'button1']);
+    button_doc_no_kwargs('button2');
+    button_doc(['label' => 'danger', 'kind' => 'danger']);
+    button_doc_no_kwargs('small info btn', 'info', array('cumstom-class', 'cumstom-class2'), 'button', 'xs');
+    button_doc(['label' => 'big boy', 'size' => 'lg']);
+    button_doc(['label' => 'big boy2', 'classes' => ['btn-lg']]);
+    button_doc(['label' => 'submit', 'type' => 'submit']);
+    button_doc(['label' => 'custom', 'attrs' => ['style' => 'color: purple;']]);
+    ?></section>
+<?php endif; ?>
 
 
-<h1>Breadcrumbs</h1>
-<section>
-<code>breadcrumbs(array items=array(), array classes=array(), assoc_array attrs=array())</code>
-<?php
-// BREADCRUMBS
-breadcrumbs_doc(['Home' => '#', 'Library' => '#', 'Data' => '#']);
-?>
-<pre>
-echo breadcrumbs([
+<?php if ($alert_docs === true): ?>
+    <h1>Alerts</h1>
+    <section>
+    <code>alert(string kind, string content, bool dismissible, string id, classes=array(), assoc_array attrs=array())</code>
+    <?php
+    // ALERT
+    alert_doc_no_kwargs('warning', 'indismissible me');
+    alert_doc(['kind' => 'danger', 'content' => '<strong>Dangerous</strong>', 'dismissible' => true]);
+    ?>
+    <pre>
+echo Alert::begin([&apos;kind&apos; =&gt; &apos;success&apos;, &apos;dismissible&apos; =&gt; true]); ?&gt;
+    This is a dismissible alert with a bit more complex HTML (which nobody wants to put into a PHP string).
+    &lt;a href=&quot;#&quot; class=&quot;alert-link&quot;&gt;This is a link with special markup also.&lt;/a&gt;&lt;?php
+echo Button::create('Check this out');
+echo Alert::end();</pre><?php
+    echo Alert::begin(['kind' => 'success', 'dismissible' => true]); ?>
+        This is a dismissible alert with a bit more complex HTML (which nobody wants to put into a PHP string).
+        <a href="#" class="alert-link">This is a link with special markup also.</a><br><?php
+    echo Button::create('Check this out');
+    echo Alert::end();
+    ?></section>
+<?php endif; ?>
+
+
+<?php if ($breadcrumbs_docs === true): ?>
+    <h1>Breadcrumbs</h1>
+    <section>
+    <code>Breadcrumbs::create(array items=array(), array classes=array(), assoc_array attrs=array())</code>
+    <?php
+    // BREADCRUMBS
+    breadcrumbs_doc(['Home' => '#', 'Library' => '#', 'Data' => '#']);
+    ?>
+    <pre>
+echo Breadcrumbs::create([
     [&apos;items&apos;] =&gt; [
         [&apos;Homepage&apos;] =&gt; &apos;http://www.google.com&apos;,
         &apos;Page&apos;,
         &apos;Subpage&apos;
     ]
 ])</pre>
-<?php
-echo breadcrumbs(['items' => ['Homepage' => 'http://www.google.com', 'Page', 'Subpage']]).'<br><br><br>';
-breadcrumbs_doc(['Home' => '#', 'No link' => null]);
-?></section>
+    <?php
+    echo Breadcrumbs::create(['items' => ['Homepage' => 'http://www.google.com', 'Page', 'Subpage']]).'<br><br><br>';
+    breadcrumbs_doc(['Home' => '#', 'No link' => null]);
+    ?></section>
+<?php endif; ?>
 
 
-<h1>Modal</h1>
-<section class="example">
-<code>modal(string title='', string body='', string footer='', string header='', string id='uid_'.uniqid(), array classes=array('fade'), assoc_array attrs=array(), bool initialize=false)</code>
-<?php
-echo alert_begin('warning'); ?>
-<strong>Note:</strong> 'classes' is set to '[]' to prevent that the 'fade' class is set.
-<?php
-echo alert_end();
+<?php if ($modal_docs === true): ?>
+    <h1>Modal</h1>
+    <section class="example">
+    <code>modal(string title='', string body='', string footer='', string header='', string id='uid_'.uniqid(), array classes=array('fade'), assoc_array attrs=array(), bool initialize=false)</code>
+    <?php
+    echo Alert::begin('warning'); ?>
+        <strong>Note:</strong> 'classes' is set to '[]' to prevent that the 'fade' class is set.
+    <?php
+    echo Alert::end();
 
 
-// MODAL
-// show modal by avoiding the 'fade' class to be set (by default)
-modal_doc(['classes' => []]);
-modal_doc(['header' => null, 'footer' => null, 'body' => 'modal-body only', 'classes' => []]);
-modal_doc(['title' => 'My Modal', 'footer' => null, 'body' => 'custom title and no footer', 'classes' => []]);
-?><pre>
-echo modal([
+    // MODAL
+    // show modal by avoiding the 'fade' class to be set (by default)
+    modal_doc(['classes' => []]);
+    modal_doc(['header' => null, 'footer' => null, 'body' => 'modal-body only', 'classes' => []]);
+    modal_doc(['title' => 'My Modal', 'footer' => null, 'body' => 'custom title and no footer', 'classes' => []]);
+    ?><pre>
+echo Modal::create([
     'header' => null,
-    'footer' => button('cool', 'warning'),
+    'footer' => Button::create('cool', 'warning'),
     'body' => 'no header and custom button in footer',
     'classes' => []
-])
-</pre><?php
-echo modal([
-    'header' => null,
-    'footer' => button('cool', 'warning'),
-    'body' => 'no header and custom button in footer',
-    'classes' => []]
-);
+])</pre><?php
+    echo Modal::create([
+        'header' => null,
+        'footer' => Button::create('cool', 'warning'),
+        'body' => 'no header and custom button in footer',
+        'classes' => []]
+    );
 
-// show modal by initializing it (without backdrop)
-modal_doc(['body' => 'initialized with JavaScript (thus it can be closed)', 'initialize' => true, 'attrs' => array('data-backdrop' => 'false')]);
+    // show modal by initializing it (without backdrop)
+    modal_doc(['body' => 'initialized with JavaScript (thus it can be closed)', 'initialize' => true, 'attrs' => ['data-backdrop' => 'false']]);
 
-// parts defined in pure HTML
-?><pre>
-echo modal_begin([&apos;footer&apos; =&gt; button(&apos;Button&apos;), &apos;classes&apos; =&gt; []]);
-echo modal_header(); ?&gt;
+    // parts defined in pure HTML
+    ?><pre>
+echo Modal::begin([&apos;footer&apos; =&gt; Button::create(&apos;Button&apos;), &apos;classes&apos; =&gt; []]);
+echo Modal::header(); ?&gt;
 &lt;div class=&quot;modal-body&quot;&gt;
     &lt;h5&gt;
         Only the modal body is written in pure HTML.
     &lt;/h5&gt;
 &lt;/div&gt;
 &lt;?php
-echo modal_footer();
-echo modal_end();</pre><?php
-echo modal_begin(['footer' => button('Button'), 'classes' => []]);
-echo modal_header(); ?>
-<div class="modal-body">
-    <h5>
-        Only the modal body is written in pure HTML.
-    </h5>
-</div>
-<?php
-echo modal_footer();
-echo modal_end();
-?></section>
+echo Modal::footer();
+echo Modal::end();</pre><?php
+    echo Modal::begin(['footer' => Button::create('Button'), 'classes' => []]);
+    echo Modal::header(); ?>
+    <div class="modal-body">
+        <h5>
+            Only the modal body is written in pure HTML.
+        </h5>
+    </div>
+    <?php
+    echo Modal::footer();
+    echo Modal::end();
+    ?></section>
+<?php endif; ?>
 
 </body>
 </html>

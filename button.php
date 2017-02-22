@@ -29,10 +29,3 @@ class Button extends Component {
         .'</button>';
     }
 }
-
-/**
- * @param ...string $items
- */
-function button() {
-    return render_shortcut('Button', func_get_args());
-}
